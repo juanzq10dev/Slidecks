@@ -13,11 +13,35 @@ uv run uvicorn main:app --reload
 
 Servidor en `http://127.0.0.1:8000`. Docs automáticas en `/docs`.
 
-Para usarlo en remoto usar: 
+### Exponerlo a los estudiantes
+
+**Opción estable con ngrok (URL fija, recomendada).** Se configura una vez y la
+URL no cambia nunca, así que se puede dejar escrita en el notebook del cliente y
+los estudiantes solo hacen `git pull`:
 
 ```bash
-cloudflared tunnel --url localhost:8080
+# 1. Crear cuenta gratis en ngrok.com y guardar el token una sola vez:
+ngrok config add-authtoken <token-del-dashboard>
+
+# 2. En dashboard.ngrok.com -> Domains -> Create Domain
+#    se obtiene un dominio permanente, p. ej. melylabs-detective.ngrok-free.app
+
+# 3. Cada clase, con el servidor corriendo en el puerto 8000:
+ngrok http --url=stingray-monopoly-prodigal.ngrok-free.dev 8000 
 ```
+
+Notas del plan gratis de ngrok:
+
+- Solo un túnel activo a la vez.
+- La primera petición desde un navegador muestra una página intersticial de
+  aviso. Las peticiones con `httpx` la evitan enviando el header
+  `ngrok-skip-browser-warning: 1` junto con `Authorization`. Para `/docs` en el
+  navegador hay que hacer un clic manual la primera vez.
+
+> Cloudflare Tunnel con dominio propio (`cloudflared tunnel route dns ...`)
+> también da una URL fija, pero exige mover los nameservers del dominio a
+> Cloudflare y recrear todos sus registros DNS ahí. No vale la pena para un
+> servidor de clase si el dominio ya se usa para otras cosas.
 
 En `/docs`, el botón **Authorize** (candado) permite pegar el token una vez;
 a partir de ahí todos los "Try it out" envían `Authorization: Bearer <token>`.
