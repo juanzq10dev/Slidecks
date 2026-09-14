@@ -1,5 +1,20 @@
 #import "../../template.typ": *
 
+#let two-col-table(col1, col2, rows) = table(
+  columns: (1fr, 1.6fr),
+  inset: 8pt,
+  align: (left + horizon, left + horizon),
+  stroke: (x, y) => (
+    bottom: if y == 0 { 1.4pt + palette.vanilla-custard } else { 0.6pt + palette.charcoal.lighten(70%) },
+  ),
+  fill: (x, y) => if y == 0 { palette.beige } else { none },
+  table.header(
+    text(weight: "bold", fill: palette.gunmetal)[#col1],
+    text(weight: "bold", fill: palette.gunmetal)[#col2],
+  ),
+  ..rows.flatten(),
+)
+
 #show: deck.with(
   title: "Clase 02 — Buenas Prácticas en el Uso de IA",
   author: "Juan Zurita",
@@ -15,6 +30,18 @@
   date: "Clase 02 · Agosto 2026",
 )
 
+#contents-slide(
+  entries: (
+    (name: "Apertura: antes de cortar nada", page: "03"),
+    (name: "La IA es como un cuchillo", page: "04"),
+    (name: "Las 4D", page: "06"),
+    (name: "Delegación y descripción", page: "09"),
+    (name: "Discernimiento y diligencia", page: "13"),
+    (name: "Dilemas éticos", page: "15"),
+    (name: "Síntesis y cierre", page: "19"),
+  ),
+)
+
 // ============================================================
 // Apertura
 // ============================================================
@@ -28,10 +55,7 @@
 
   #v(6mm)
   - ¿Revisaste el resultado o confiaste de una?
-  - En una palabra: ¿cómo te sentiste seguro, apurado, dudoso?
 
-  #v(6mm)
-  Compártela con la persona de al lado.
 ]
 
 // ============================================================
@@ -61,21 +85,21 @@
 // ============================================================
 #section-slide(
   number: "02",
-  title: "El framework 4D",
+  title: "Las 4D",
   subtitle: "Los pilares del buen uso, entre todos",
 )
 
 #activity-slide(
   kind: "Actividad",
-  title: "Escribe el prompt que usarías hoy",
+  title: "Escribe la instrucción que usarías hoy",
   duration: "6 min",
 )[
   Piensa en una tarea real y pendiente: un ensayo, una tarea, un resumen, un
   proyecto de código.
 
   #v(6mm)
-  - Escribe, tal como lo harías *hoy mismo*, el prompt que le darías a una IA
-    para resolverla.
+  - Escribe, tal como lo harías *hoy mismo*, la instrucción que le darías a
+    una IA para resolverla.
   - Guárdalo, no lo borres.
 ]
 
@@ -95,8 +119,8 @@
   + #text(weight: "bold")[Diligencia]
 
   #v(6mm)
-  No es una lista de pasos ni un checklist: es un *ciclo*. Si una falla, las
-  otras tres se debilitan.
+  No es una lista de pasos que sigues una sola vez: es un *ciclo*. Si una
+  falla, las otras tres se debilitan.
 ]
 
 #content-slide(
@@ -115,22 +139,53 @@
 ]
 
 #content-slide(
+  title: "¿Qué delegar y qué no?",
+  section: "4D",
+)[
+  #two-col-table("Delegar a la IA", "Quedarte tú", (
+    (
+      [Buscar y resumir información repetitiva],
+      [Decidir qué información le importa a tu audiencia],
+    ),
+    (
+      [Generar un primer borrador rápido],
+      [Juzgar si ese borrador dice lo que tú quieres decir],
+    ),
+    (
+      [Detectar errores de ortografía o formato],
+      [Evaluar si el argumento central tiene sentido],
+    ),
+    (
+      [Adaptar un texto a otro tono o idioma],
+      [Decidir sobre personas, por ejemplo qué nota merece un compañero],
+    ),
+  ))
+]
+
+#content-slide(
   title: "Descripción",
   section: "4D",
 )[
   Las 3 P para describir lo que quieres:
 
   #v(6mm)
-  - #text(weight: "bold")[Producto (¿Qué?)]:
-    - Formato, audiencia, extensión y tono
-    - ("un correo de 150 palabras para compradores internacionales..." funciona mucho mejor que "escríbeme un correo")
-  - #text(weight: "bold")[Proceso (¿Cómo?)]: 
-    - Cómo quieres que piense: ¿analiza varios ángulos?, ¿considera contraargumentos?, ¿va por pasos?
-  - #text(weight: "bold")[Desempeño]: 
-    - Cómo debe comportarse: ¿te pregunta antes de asumir?, ¿cuestiona tus supuestos?
+  #two-col-table("P", "Ejemplo", (
+    (
+      [*Producto (¿Qué?)*\ Formato, audiencia, extensión y tono],
+      [Pide "un correo de 150 palabras para compradores internacionales" en vez de "escríbeme un correo"],
+    ),
+    (
+      [*Proceso (¿Cómo?)*\ Cómo quieres que piense],
+      [Pide "antes de responder, considera dos contraargumentos" en vez de dejarla improvisar],
+    ),
+    (
+      [*Desempeño*\ Cómo debe comportarse],
+      [Pide "pregúntame si algo no está claro, no asumas" en vez de que invente supuestos],
+    ),
+  ))
 
   #v(6mm)
-  #text(weight: "bold")[Input vago = output vago. Siempre.]
+  #text(weight: "bold")[Si le pides algo vago, te devuelve algo vago. Siempre.]
 ]
 
 #activity-slide(
@@ -154,13 +209,20 @@
   bien razonado *antes* de usarlo.
 
   #v(6mm)
-  - #text(weight: "bold")[Del producto] 
-    - ¿Es correcto?, ¿le sirve a la audiencia?, ¿es coherente? 
-    - Que se vea profesional no significa que sea verdad
-  - #text(weight: "bold")[Del proceso] 
-    - ¿De verdad razonó el problema, o solo organizó información de forma atractiva?
-  - #text(weight: "bold")[Del desempeño]
-    - ¿El tono y el nivel de detalle encajan con lo que necesitabas?
+  #two-col-table("Qué revisar", "Pregúntate", (
+    (
+      [*Del producto*],
+      [¿Es correcto?, ¿le sirve a la audiencia?, ¿es coherente? Que se vea profesional no significa que sea verdad],
+    ),
+    (
+      [*Del proceso*],
+      [¿De verdad razonó el problema, o solo organizó información de forma atractiva?],
+    ),
+    (
+      [*Del desempeño*],
+      [¿El tono y el nivel de detalle encajan con lo que necesitabas?],
+    ),
+  ))
 
   #v(6mm)
   #text(weight: "bold")[Lee cada respuesta como si la hubiera escrito tu
@@ -187,8 +249,41 @@
 
 #activity-slide(
   kind: "Dilema ético",
+  title: "¿A quién le tocaba decidir?",
+  duration: "5 min",
+)[
+  #text(style: "italic")[
+    "Un estudiante le pidió a la IA que decidiera qué compañero de equipo
+    merecía la nota más alta, basándose en los mensajes del chat grupal."
+  ]
+
+  #v(6mm)
+  En grupos debatan:
+  - ¿Qué D falló primero en este caso?
+  - ¿Qué harían antes de entregarlo?
+]
+
+#activity-slide(
+  kind: "Dilema ético",
+  title: "¿Bastaba con eso?",
+  duration: "5 min",
+)[
+  #text(style: "italic")[
+    "Alguien le pidió a la IA 'escribe algo para explicarle a mis papás por
+    qué llegué tarde', sin dar más contexto, y envió la respuesta tal cual
+    aunque sonaba a excusa genérica."
+  ]
+
+  #v(6mm)
+  En grupos debatan:
+  - ¿Qué D falló primero en este caso?
+  - ¿Qué harían antes de entregarlo?
+]
+
+#activity-slide(
+  kind: "Dilema ético",
   title: "¿Lo publicarías así?",
-  duration: "8 min",
+  duration: "5 min",
 )[
   #text(style: "italic")[
     "La IA te entregó un reporte con muy buena redacción, pero una de las
@@ -197,49 +292,47 @@
 
   #v(6mm)
   En grupos debatan:
-  - ¿Qué D falló primero en este caso: discernimiento o diligencia?
+  - ¿Qué D falló primero en este caso?
   - ¿Qué harían antes de entregarlo?
-  - ¿Cómo se vería aplicar esa D *bien* en esta misma situación?
+]
 
-  #v(4mm)
-  Compartimos 2 posturas distintas en plenaria.
+#activity-slide(
+  kind: "Dilema ético",
+  title: "¿Quién responde?",
+  duration: "5 min",
+)[
+  #text(style: "italic")[
+    "Un estudiante entregó un ensayo generado casi completo por la IA sin
+    decirlo, y cuando el profesor preguntó de dónde salió un argumento,
+    contestó 'no sé, así me lo dio la IA'."
+  ]
+
+  #v(6mm)
+  En grupos debatan:
+  - ¿Qué D falló primero en este caso?
+  - ¿Qué harían antes de entregarlo?
 ]
 
 // ============================================================
 // Síntesis y cierre
 // ============================================================
-#content-slide(
-  title: "Un ciclo, no una lista",
-  section: "Síntesis",
-)[
-  Las 4D no se aplican una vez y en orden, se retroalimentan todo el tiempo:
-  lo que discierne hoy mejora cómo describes mañana.
-
-  #v(6mm)
-  Y aplican distinto según el modo de trabajo:
-  - #text(weight: "bold")[Automatización] — tareas rutinarias, la IA ejecuta
-  - #text(weight: "bold")[Aumentación] — resolución conjunta, tú y la IA
-    piensan juntos
-  - #text(weight: "bold")[Agencia] — la IA opera con más independencia, tu
-    diligencia importa aún más
-]
 
 #statement-slide(
-  statement: "Que la IA haya escrito el primer borrador no reduce tu responsabilidad sobre el resultado final.",
+  statement: "Que la IA haya hecho parte del trabajo no reduce tu responsabilidad sobre el resultado final.",
   attribution: "AI Fluency Framework, Anthropic",
 )
 
 #activity-slide(
   kind: "Taller integrador",
-  title: "Vuelve al prompt que escribiste",
+  title: "Vuelve a la instrucción que escribiste",
   duration: "12 min",
 )[
-  Saca la tarea y el prompt que escribiste al inicio de esta sección.
+  Saca la tarea y la instrucción que escribiste al inicio de esta sección.
   Revísalo con las cuatro preguntas:
 
   #v(4mm)
   + #text(weight: "bold")[Delegación]: ¿qué parte le toca de verdad a la IA?
-  + #text(weight: "bold")[Descripción]: reescribe tu prompt con las 3P
+  + #text(weight: "bold")[Descripción]: reescribe tu instrucción con las 3P
   + #text(weight: "bold")[Discernimiento]: ¿qué revisarías antes de creerle?
   + #text(weight: "bold")[Diligencia]: ¿qué declararías y quién responde por
     el resultado final?
@@ -250,7 +343,7 @@
   section: "Síntesis",
 )[
   + *Delegación*: decide qué le toca a la IA y qué a ti, antes de empezar
-  + *Descripción*: un input vago siempre produce un output vago
+  + *Descripción*: una instrucción vaga siempre produce un resultado vago
   + *Discernimiento*: lee cada respuesta con el escepticismo de un rival
   + *Diligencia*: la responsabilidad del resultado final es siempre tuya
   + Las 4D funcionan como un *ciclo*: una debilidad afecta a las demás
@@ -264,7 +357,7 @@
   section: "Referencias",
 )[
   #set text(size: 14pt)
-  El framework de las 4D (Delegación, Descripción, Discernimiento,
+  El modelo de las 4D (Delegación, Descripción, Discernimiento,
   Diligencia) fue desarrollado por Anthropic junto con los profesores
   Rick Dakan (Ringling College of Art and Design) y Joseph Feller
   (University College Cork).

@@ -121,6 +121,15 @@
 ) = {
   slide-count.step()
 
+  // La altura disponible para la lista es fija (52mm a ~178mm). El espaciado
+  // por defecto entre bloques hacía que la lista se saliera de la diapositiva
+  // con más de 6 entradas, así que aquí se controla explícitamente y se
+  // reduce cuando hay más entradas para que siempre quepan.
+  let n = entries.len()
+  let icon-size = if n <= 6 { 9mm } else if n == 7 { 8.5mm } else { 8mm }
+  let name-size = if n <= 6 { 17pt } else if n == 7 { 16.5pt } else { 15.5pt }
+  let entry-gap = if n <= 6 { 8mm } else if n == 7 { 6mm } else { 4.5mm }
+
   place(top + left, dx: 14mm, dy: 16mm)[
     #text(size: 30pt, weight: "bold", fill: palette.gunmetal)[#title]
   ]
@@ -130,14 +139,14 @@
 
   place(top + left, dx: 14mm, dy: 52mm)[
     #box(width: slide-width - 28mm)[
+      #set block(spacing: 0mm)
       #for (i, entry) in entries.enumerate() [
         #grid(
           columns: (14mm, 1fr, 20mm),
           align: (center + horizon, left + horizon, right + horizon),
-          row-gutter: 9mm,
           [
             #box(
-              width: 9mm, height: 9mm, radius: 4.5mm,
+              width: icon-size, height: icon-size, radius: icon-size / 2,
               fill: if calc.even(i) { palette.iron-grey } else { palette.charcoal },
             )[
               #align(center + horizon)[
@@ -146,15 +155,16 @@
             ]
           ],
           [
-            #text(size: 17pt, fill: palette.gunmetal)[#entry.name]
+            #text(size: name-size, fill: palette.gunmetal)[#entry.name]
           ],
           [
             #text(size: 12pt, fill: palette.charcoal)[#entry.at("page", default: "")]
           ],
         )
         #if i < entries.len() - 1 [
-          #v(-4mm)
+          #v(entry-gap * 0.5)
           #line(length: slide-width - 28mm, stroke: 0.6pt + palette.charcoal.lighten(70%))
+          #v(entry-gap * 0.5)
         ]
       ]
     ]

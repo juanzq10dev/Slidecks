@@ -30,14 +30,11 @@
 #contents-slide(
   entries: (
     (name: "Bienvenida y competencias", page: "03"),
-    (name: "¿Qué es la Inteligencia Artificial?", page: "06"),
-    (name: "Large Language Models (LLM)", page: "10"),
-    (name: "Transformers y atención", page: "14"),
-    (name: "Temperatura y entropía", page: "18"),
-    (name: "Hugging Face", page: "22"),
-    (name: "Buenas prácticas en el uso de IA", page: "25"),
-    (name: "Ingeniería de prompts", page: "28"),
-    (name: "Síntesis y cierre", page: "33"),
+    (name: "¿Qué es la Inteligencia Artificial?", page: "04"),
+    (name: "Large Language Models (LLM)", page: "07"),
+    (name: "Temperatura y entropía", page: "11"),
+    (name: "Buenas prácticas en el uso de IA", page: "15"),
+    (name: "Hugging Face", page: "19"),
   ),
 )
 
@@ -144,7 +141,6 @@
   1. Alguien dice la primera palabra de una oración
   2. La siguiente persona dice *solo una palabra más probable* que continúe la frase.
   3. Continúa.
-  4. Nadie sabe hacia dónde va la frase cada quien predice desde el contexto inmediato
 ]
 
 #activity-slide(
@@ -187,23 +183,29 @@
 )[
   La temperatura controla qué tan variadas son las respuestas de un modelo de IA.
   #v(6mm)
-  - *Temperatura baja (cerca a 0)*: produce respuestas concentradas en las opciones más probables. 
-  - *Temperatura baja (cerca a 1)*: aumentando la posibilidad de elegir palabras menos probables.
+  - *Temperatura baja (cerca a 0)*: produce respuestas concentradas en las opciones más probables.
+  - *Temperatura alta (cerca a 1)*: aumentando la posibilidad de elegir palabras menos probables.
   #v(6mm)
   #text(weight: "bold")[Entropía] es la medida de *cuánta sorpresa* hay en esa elección:
-  - Temperatura baja = entropía baja; 
+  - Temperatura baja = entropía baja;
   - Temperatura alta= entropía alta.
+]
 
-  Veamos como funciona un LLM en vivo:
-
-
+#activity-slide(
+  kind: "Demo en vivo",
+  title: "Veamos un LLM en acción",
+  duration: "5 min",
+)[
+  #v(4mm)
   - https://chyams-llm-explorer.hf.space/?__theme=system&utm_source=chatgpt.com
 
-  ¿Quién sabe que significa GPT? 
+  #v(8mm)
+  #text(size: 20pt, weight: "bold")[¿Quién sabe qué significa GPT?]
 
+  #v(8mm)
   - https://poloclub.github.io/transformer-explainer/
+]
 
-]  
 
 #two-column-slide(
   title: "Lo que SÍ y NO hace un LLM",
@@ -228,50 +230,6 @@
   statement: "La IA no entiende el mundo. Entiende patrones.",
 )
 
-// 
-
-// ============================================================
-// Hugging Face
-// ============================================================
-#section-slide(
-  number: "05",
-  title: "Hugging Face",
-  subtitle: "El ecosistema abierto de modelos de IA",
-)
-
-#content-slide(
-  title: "El \"GitHub\" de los modelos de IA",
-  section: "Hugging Face",
-)[
-  Hugging Face es una plataforma donde la comunidad publica, comparte y prueba modelos de IA abiertamente.
-
-  #v(6mm)
-  - #text(weight: "bold")[Hub] — miles de modelos preentrenados, listos para descargar o usar vía API
-  - #text(weight: "bold")[Datasets] — conjuntos de datos públicos para entrenar o evaluar modelos
-  - #text(weight: "bold")[Spaces] — demos interactivas de modelos, corriendo en el navegador
-  - #text(weight: "bold")[Transformers] — la librería en Python que conecta todo esto con tu código
-
-  #v(6mm)
-  Cada modelo tiene una #text(weight: "bold")[model card]: su tarea, limitaciones, licencia y forma de uso.
-]
-
-#activity-slide(
-  kind: "Actividad",
-  title: "Exploradores de Hugging Face",
-  duration: "10 min",
-)[
-  En parejas, entren a huggingface.co/models y busquen *un modelo* que les llame la atención.
-
-  #v(4mm)
-  Identifiquen y anoten:
-  - ¿Para qué *tarea* fue creado? (texto, imagen, audio...)
-  - ¿Qué *licencia* tiene? ¿Se puede usar comercialmente?
-  - ¿Cuántas *descargas* o *likes* tiene — qué tan popular es?
-  - ¿Tiene un *Space* donde se pueda probar sin instalar nada?
-
-  #v(6mm)
-  Cierre: 3 parejas comparten su modelo en 30 segundos cada una.
-]
 
 // ============================================================
 // Buenas prácticas
@@ -282,8 +240,23 @@
   subtitle: "Usar IA bien es una habilidad, no un accidente",
 )
 
+#activity-slide(
+  kind: "Actividad",
+  title: "Construyamos el board juntos",
+  duration: "6 min",
+)[
+  #v(4mm)
+  Entre todos armamos en un board dos columnas: #text(weight: "bold")[Hacer] y #text(weight: "bold")[Evitar] al usar IA.
+
+  #v(6mm)
+  Por turnos, cada estudiante propone una práctica para una de las dos columnas.
+
+  #v(6mm)
+  Al final comparamos el board armado con la lista de referencia.
+]
+
 #two-column-slide(
-  title: "Buenas prácticas vs. riesgos",
+  title: "Buenas prácticas vs. riesgos (referencia)",
   section: "Buenas prácticas",
   left-content: [
     #text(weight: "bold", fill: palette.iron-grey)[Hacer]
@@ -302,88 +275,58 @@
 )
 
 #activity-slide(
-  kind: "Dilema ético",
-  title: "¿Qué harías tú?",
+  kind: "Kahoot",
+  title: "Breve repaso de introducción a la IA",
   duration: "8 min",
 )[
-  #text(style: "italic")[
-    "Un compañero te pasa un ensayo generado casi por completo con IA para
-    entregarlo como tarea. Tiene buena forma, pero no estás seguro de que los
-    datos que cita sean reales."
-  ]
-
-  #v(6mm)
-  En grupos de 3-4:
-  - ¿Qué harían en esa situación?
-  - ¿Qué principio de buenas prácticas está en juego?
-  - ¿Cómo se vería usar la IA *bien* en ese mismo caso?
-
   #v(4mm)
-  Compartimos 2 posturas distintas en plenaria.
+  #text(size: 20pt, weight: "bold")[Entremos a Kahoot]
+
+  #v(8mm)
+  - Link: #text(style: "italic", fill: palette.charcoal)[(pendiente)]
 ]
 
 // ============================================================
-// Ingeniería de prompts
+// Hugging Face
 // ============================================================
 #section-slide(
-  number: "07",
-  title: "Ingeniería de prompts",
-  subtitle: "Comunicarse con precisión con un modelo",
+  number: "05",
+  title: "Hugging Face",
+  subtitle: "El ecosistema abierto de modelos de IA",
 )
 
 #content-slide(
-  title: "Anatomía de un buen prompt",
-  section: "Prompts",
+  title: "Huggingface: modelos de IA al alcance de todos",
+  section: "Hugging Face",
 )[
-  Un prompt efectivo casi siempre incluye estas piezas:
-
-  #v(4mm)
-  + *Rol* — "Actúa como un editor técnico..."
-  + *Contexto* — la información de fondo que el modelo necesita
-  + *Tarea* — qué quieres exactamente que haga
-  + *Formato* — cómo quieres la respuesta (lista, tabla, tono, extensión)
-  + *Restricciones* — qué evitar o qué límites respetar
+  Hugging Face es una plataforma donde la comunidad publica, comparte y prueba modelos de IA abiertamente.
 
   #v(6mm)
-  Mientras más de estas piezas incluyas, menos tiene que *adivinar* el modelo.
+  - #text(weight: "bold")[Hub] — miles de modelos preentrenados, listos para descargar o usar vía API
+  - #text(weight: "bold")[Datasets] — conjuntos de datos públicos para entrenar o evaluar modelos
+  - #text(weight: "bold")[Spaces] — demos interactivas de modelos, corriendo en el navegador
+  - #text(weight: "bold")[Transformers] — la librería en Python que conecta todo esto con tu código
+
+  #v(6mm)
+  Cada modelo tiene una #text(weight: "bold")[model card]: su tarea, limitaciones, licencia y forma de uso.
 ]
 
-#two-column-slide(
-  title: "Técnicas de prompting",
-  section: "Prompts",
-  left-content: [
-    #text(weight: "bold", fill: palette.iron-grey)[Zero-shot / Few-shot]
-    - *Zero-shot*: pides la tarea directamente, sin ejemplos
-    - *Few-shot*: das 2-3 ejemplos resueltos antes de la tarea real
-    - Few-shot ayuda cuando el formato de salida es específico
-  ],
-  right-content: [
-    #text(weight: "bold", fill: palette.iron-grey)[Chain-of-thought / Rol]
-    - *Chain-of-thought*: pides "piensa paso a paso" antes de responder
-    - *Role prompting*: le das una identidad experta ("actúa como...")
-    - Ambas mejoran tareas de razonamiento o precisión
-  ],
-)
-
-#statement-slide(
-  statement: "Un prompt es una receta, no un deseo: mientras más preciso seas, mejor sale el platillo.",
-)
-
 #activity-slide(
-  kind: "Taller",
-  title: "Mejora el prompt",
+  kind: "Demo en vivo",
+  title: "Exploradores de Hugging Face",
   duration: "10 min",
 )[
-  Prompt original (deficiente): #text(style: "italic")["Escríbeme algo sobre marketing."]
+  Lo hacemos todos juntos: el profe navega huggingface.co/models mientras la clase decide qué explorar.
 
   #v(4mm)
-  En parejas, reescríbanlo aplicando la anatomía de un buen prompt:
-  - Agreguen *rol*, *contexto*, *tarea* clara, *formato* y *restricciones*
-  - Pruébenlo si tienen acceso a una IA — comparen el resultado con el del prompt original
-  - Iteren una vez más basados en la respuesta obtenida
+  Entre todos identificamos:
+  - ¿Para qué *tarea* fue creado? (texto, imagen, audio...)
+  - ¿Qué *licencia* tiene? ¿Se puede usar comercialmente?
+  - ¿Cuántas *descargas* o *likes* tiene — qué tan popular es?
+  - ¿Tiene un *Space* donde se pueda probar sin instalar nada?
 
   #v(6mm)
-  Cierre: 2 parejas comparten su prompt final y qué cambiaron.
+  Vamos rotando: cada estudiante propone el siguiente modelo a explorar.
 ]
 
 // ============================================================
@@ -399,21 +342,18 @@
   + *Temperatura / entropía*: el dial entre lo predecible y lo creativo
   + *Hugging Face*: el ecosistema abierto donde viven estos modelos
   + *Buenas prácticas*: usar IA con criterio, no en automático
-  + *Prompting*: comunicarte con precisión para obtener mejores resultados
 ]
 
-#content-slide(
+#activity-slide(
+  kind: "Reflexión",
   title: "Volvamos a tu palabra inicial",
-  section: "Síntesis",
+  duration: "5 min",
 )[
-  Recuerda la palabra que escribiste al comienzo de la clase para describir la IA.
+  Recuerda que escribiste al comienzo de la clase para describir la IA.
 
   #v(6mm)
   - ¿La cambiarías ahora?
-  - ¿Qué palabra nueva usarías?
-  - Compártela con la persona de al lado — en una frase, explica por qué
+  - ¿Qué nuevo concepto usarías?
 
   #v(8mm)
-  #text(weight: "bold")[Para la próxima clase]: trae un prompt que hayas escrito
-  esta semana y estemos listos para diseccionarlo en grupo.
 ]

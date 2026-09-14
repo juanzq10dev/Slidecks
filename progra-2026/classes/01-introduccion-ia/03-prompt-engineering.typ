@@ -25,6 +25,32 @@
   ]
 }
 
+// Caja para simular la respuesta de un LLM
+#let response-box(label: "RESPUESTA DEL LLM", body) = block(
+  width: 100%,
+  inset: (x: 5mm, y: 4mm),
+  radius: 2mm,
+  fill: white,
+  stroke: (left: 4pt + palette.gunmetal),
+)[
+  #text(size: 10pt, tracking: 0.15em, weight: "bold", fill: palette.gunmetal)[#label]
+  #v(2mm)
+  #text(size: 13pt, fill: palette.charcoal)[#body]
+]
+
+// Caja para simular el razonamiento interno de un LLM, antes de su respuesta
+#let reasoning-box(body) = block(
+  width: 100%,
+  inset: (x: 5mm, y: 3.5mm),
+  radius: 2mm,
+  fill: palette.beige.darken(6%),
+  stroke: (left: 4pt + palette.charcoal.lighten(45%)),
+)[
+  #text(size: 9pt, tracking: 0.15em, weight: "bold", fill: palette.charcoal.lighten(10%))[RAZONAMIENTO DEL MODELO]
+  #v(2mm)
+  #text(size: 11pt, fill: palette.charcoal, style: "italic")[#body]
+]
+
 // Tarjeta de especificación (para la revelación del encargo real)
 #let spec-card(label, value) = block(
   width: 100%,
@@ -66,12 +92,12 @@
   entries: (
     (name: "Simulación de apertura: el folleto imposible", page: "03"),
     (name: "Lo que el modelo no puede saber", page: "07"),
-    (name: "Anatomía de un prompt", page: "13"),
-    (name: "Técnicas: few-shot y razonamiento", page: "17"),
+    (name: "Anatomía de un prompt", page: "12"),
+    (name: "Técnicas: few-shot y razonamiento", page: "16"),
     (name: "Prompting para programar", page: "24"),
-    (name: "Antipatrones: cómo se rompe un prompt", page: "27"),
-    (name: "Iterar: un prompt se depura, no se escribe", page: "30"),
-    (name: "Batalla de prompts y cierre", page: "33"),
+    (name: "Antipatrones: cómo se rompe un prompt", page: "26"),
+    (name: "Iterar: un prompt se depura, no se escribe", page: "28"),
+    (name: "Adivina el prompt y cierre", page: "31"),
   ),
 )
 
@@ -351,26 +377,108 @@
   ]
 ]
 
+#content-slide(
+  title: "Cadena de pensamiento: pensar antes de responder",
+  section: "Técnicas",
+)[
+  - "Razona paso a paso antes de dar la respuesta final"
+  - Sirve en lógica, matemática, depuración y decisiones con varios criterios
+  - Cuesta más tokens y tiempo: no lo uses para pedir una definición
+
+  #v(4mm)
+  #text(size: 14pt, style: "italic")[Los modelos de razonamiento ya lo hacen solos.]
+]
+
 #two-column-slide(
-  title: "Razonamiento y descomposición",
+  title: "Cadena de pensamiento en la práctica",
   section: "Técnicas",
   left-content: [
-    #text(weight: "bold", fill: palette.iron-grey)[Chain-of-thought]
-    - "Razona paso a paso antes de dar la respuesta final"
-    - Sirve en lógica, matemática, depuración y decisiones con varios criterios
-    - Cuesta más tokens y tiempo: no lo uses para pedir una definición
-
+    #text(weight: "bold", fill: palette.iron-grey)[Sin cadena de pensamiento]
     #v(3mm)
-    #text(size: 14pt, style: "italic")[Los modelos de razonamiento ya lo hacen solos.]
+    #prompt-box(label: "Prompt", tone: "pobre")[
+      El botón "Guardar" de mi aplicación no hace nada. \
+      ¿Qué reviso?
+    ]
+    #v(4mm)
+    #response-box[
+      Puede haber un problema con el código del botón. Revisa que el evento
+      `onClick` esté correctamente configurado.
+    ]
+    #v(3mm)
+    #text(size: 12.5pt, style: "italic")[Una sola hipótesis, la más obvia, y ya.]
   ],
   right-content: [
-    #text(weight: "bold", fill: palette.iron-grey)[Descomposición]
-    - Una tarea gigante en un prompt = respuesta mediocre en todo
-    - Pártela: primero el esquema, luego cada sección, luego la revisión
-    - Cada paso se revisa antes de seguir al siguiente
-
+    #text(weight: "bold", fill: palette.iron-grey)[Con cadena de pensamiento]
     #v(3mm)
-    #text(size: 14pt, style: "italic")[Igual que dividir un programa en funciones.]
+    #prompt-box(label: "Prompt", tone: "bueno")[
+      El botón "Guardar" de mi aplicación no hace nada. ¿Qué reviso? \
+      Razona paso a paso antes de dar la respuesta final.
+    ]
+    #v(3mm)
+    #reasoning-box[
+      Primero comprobaría si el evento `onClick` se está ejecutando. \
+      Si se ejecuta, revisaría si la función intenta enviar la información al
+      backend. \
+      Después comprobaría si el endpoint responde correctamente. \
+      Finalmente revisaría si el frontend procesa la respuesta.
+    ]
+    #v(3mm)
+    #response-box(label: "RESPUESTA FINAL")[
+      Revisa el problema en este orden: `onClick` → función → API →
+      respuesta. Así puedes identificar en qué punto se rompe el flujo.
+    ]
+  ],
+)
+
+#content-slide(
+  title: "Descomposición: partir la tarea en pasos",
+  section: "Técnicas",
+)[
+  - Una tarea gigante en un prompt = respuesta mediocre en todo
+  - Pártela: primero el esquema, luego cada sección, luego la revisión
+  - Cada paso se revisa antes de seguir al siguiente
+
+  #v(4mm)
+  #text(size: 14pt, style: "italic")[Igual que dividir un programa en funciones.]
+]
+
+#two-column-slide(
+  title: "Descomposición en la práctica",
+  section: "Técnicas",
+  left-content: [
+    #text(weight: "bold", fill: palette.iron-grey)[Sin descomposición]
+    #v(3mm)
+    #prompt-box(label: "Prompt", tone: "pobre")[
+      Mi API tarda 5 segundos en responder. Arréglalo.
+    ]
+    #v(3mm)
+    #response-box[
+      Puedes optimizar las consultas a la base de datos, agregar índices,
+      utilizar caché y reducir la cantidad de datos que devuelve la API.
+    ]
+    #v(3mm)
+    #text(size: 12.5pt, style: "italic")[Tira todas las causas a la vez, sin orden ni prioridad. ¿Por dónde empiezas?]
+  ],
+  right-content: [
+    #text(weight: "bold", fill: palette.iron-grey)[Con descomposición]
+    #v(3mm)
+    #prompt-box(label: "Prompt", tone: "bueno")[
+      Mi API tarda 5 segundos en responder. \
+      #v(2mm)
+      Identifica las posibles causas. \
+      Explica cómo comprobar cada causa. \
+      Determina cuál debería investigar primero. \
+      Propón una solución.
+    ]
+    #v(3mm)
+    #response-box[
+      Las posibles causas son la base de datos, lógica del backend, servicios
+      externos o una respuesta demasiado grande. \
+      #v(2mm)
+      Primero mide cuánto tarda cada etapa. Si la consulta a la base de datos
+      consume 4 de los 5 segundos, optimiza esa consulta antes de modificar
+      el frontend o agregar caché.
+    ]
   ],
 )
 
@@ -429,23 +537,6 @@
   ],
 )
 
-#activity-slide(
-  kind: "Preguntas",
-  title: "La trampa cómoda",
-  duration: "6 min",
-)[
-  #v(3mm)
-  #text(size: 19pt, weight: "bold")[Si la IA te da el código funcionando y tú no entiendes por qué funciona... ¿aprendiste algo?]
-
-  #v(6mm)
-  #text(size: 19pt, weight: "bold")[¿Qué prompt te habría hecho aprender, en vez de solo resolver?]
-
-  #v(6mm)
-  #text(size: 15pt)[
-    Discútanlo en grupo. Después escriban *un prompt de estudio* que puedan reutilizar.
-  ]
-]
-
 // ============================================================
 // Antipatrones
 // ============================================================
@@ -486,7 +577,7 @@
 )
 
 #content-slide(
-  title: "Depurar un prompt es depurar un programa",
+  title: "No siempre lo lograrás a la primera",
   section: "Iteración",
 )[
   Nadie escribe un programa de 200 líneas y espera que compile a la primera.
@@ -504,18 +595,36 @@
   de las cinco lo logró.]
 ]
 
+
+#activity-slide(
+  kind: "Preguntas",
+  title: "La trampa cómoda",
+  duration: "6 min",
+)[
+  #v(3mm)
+  #text(size: 19pt, weight: "bold")[Si la IA te da el código funcionando y tú no entiendes por qué funciona... ¿aprendiste algo?]
+
+  #v(6mm)
+  #text(size: 19pt, weight: "bold")[¿Qué prompt te habría hecho aprender, en vez de solo resolver?]
+
+  #v(6mm)
+  #text(size: 15pt)[
+    Discútanlo en grupo. Después escriban *un prompt de estudio* que puedan reutilizar.
+  ]
+]
+
 // ============================================================
 // Cierre integrador
 // ============================================================
 #section-slide(
   number: "08",
-  title: "Batalla de prompts",
+  title: "Adivina el prompt",
   subtitle: "Todo lo de hoy, en una sola ronda",
 )
 
 #image-slide(
   title: "El objetivo",
-  section: "Batalla de prompts",
+  section: "Adivina el prompt",
   picture: image("images/05-vaca-en-el-campo.jpeg", width: slide-width / 2, height: slide-height, fit: "cover"),
   media-width: slide-width / 2,
   position: "right",
