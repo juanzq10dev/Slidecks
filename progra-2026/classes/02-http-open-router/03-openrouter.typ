@@ -70,8 +70,8 @@
     (name: "Actividad 1: nuestra primera llamada", page: "08"),
     (name: "La respuesta, comparar modelos, costo", page: "09"),
     (name: "Construir un chatbot", page: "12"),
-    (name: "Features avanzadas y actividad 2", page: "15"),
-    (name: "Cierre y reflexión", page: "17"),
+    (name: "Features avanzadas y actividad 2", page: "17"),
+    (name: "Cierre y reflexión", page: "19"),
   ),
 )
 
@@ -223,7 +223,7 @@ API_KEY = os.environ["OPENROUTER_API_KEY"]
   duration: "10 min",
 )[
   #v(1mm)
-  En el notebook `openrouter.ipynb`, con la key ya cargada:
+  En el notebook `01-openrouter.ipynb`, con la key ya cargada:
 
   #v(4mm)
   + Ejecuta las celdas de preparación (`import`, `BASE_URL`, `HEADERS`, `show`)
@@ -367,6 +367,30 @@ respuesta = preguntar(messages)           # 2ª llamada: se manda TODO otra vez
 ]
 
 // ------------------------------------------------------------
+// Actividad: la conversación a mano (02-openrouter.ipynb)
+// ------------------------------------------------------------
+#activity-slide(
+  kind: "Taller",
+  title: "Dos turnos a mano",
+  duration: "8 min",
+)[
+  #v(1mm)
+  En el notebook `02-openrouter.ipynb`, con la key ya cargada:
+
+  #v(4mm)
+  + Ejecuta la preparación y la celda que define `preguntar(messages)`
+  + Ejecuta los dos turnos: la primera pregunta, guardar la respuesta como
+    `assistant` y la segunda pregunta
+  + Imprime `messages` completo. ¿Cuántos mensajes hay y de qué `role` es cada uno?
+  + En la celda vacía agrega un #text(weight: "bold")[tercer turno] que dependa
+    de lo anterior (por ejemplo: "¿Y otro ejemplo?")
+
+  #v(6mm)
+  Pregunta: si no guardas la respuesta como `assistant`, ¿el modelo entiende
+  "Dame un ejemplo real"? Pruébalo.
+]
+
+// ------------------------------------------------------------
 // Intuición general: el for loop
 // ------------------------------------------------------------
 #content-slide(
@@ -395,6 +419,30 @@ while True:
   - Cada vuelta: agregar `user` → llamar → imprimir → agregar `assistant`
   - `messages` crece con la conversación; es toda la "memoria" que hay
   - `preguntar()` es la misma función `POST` de la primera llamada
+]
+
+// ------------------------------------------------------------
+// Actividad: chatbot de consola (03-openrouter.ipynb)
+// ------------------------------------------------------------
+#activity-slide(
+  kind: "Taller",
+  title: "Tu chatbot de consola",
+  duration: "10 min",
+)[
+  #v(1mm)
+  En el notebook `03-openrouter.ipynb`, con la key ya cargada:
+
+  #v(4mm)
+  + Ejecuta la preparación y la celda de `preguntar(messages)`
+  + Corre el bucle y conversa 3 o 4 turnos. Haz una pregunta que solo tenga
+    sentido si recuerda lo anterior
+  + Escribe `salir` y ejecuta la última celda: mira la "memoria" y cuántos
+    mensajes quedaron
+  + Cambia el `system` (un pirata, un profe de matemáticas...) y vuelve a conversar
+
+  #v(6mm)
+  Cierre: si la charla sigue 100 turnos, ¿qué pasa con los tokens que pagas en
+  cada llamada?
 ]
 
 // ============================================================

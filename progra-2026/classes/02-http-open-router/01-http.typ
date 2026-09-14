@@ -90,6 +90,7 @@
     (name: "Anatomía de una petición y métodos", page: "08"),
     (name: "Headers y JSON", page: "11"),
     (name: "Anatomía de una respuesta y códigos", page: "15"),
+    (name: "Kahoot: repaso de HTTP", page: "19"),
     (name: "Cierre e integración", page: "20"),
   ),
 )
@@ -379,34 +380,21 @@
   )
 ]
 
-
 #activity-slide(
-  kind: "Taller",
-  title: "Inspecciona una petición real",
-  duration: "10 min",
+  kind: "Kahoot",
+  title: "Breve repaso de HTTP",
+  duration: "8 min",
 )[
-  En parejas, con laptop. Abran cualquier sitio web, entren a
-  #text(weight: "bold")[DevTools → Network] y recarguen la página.
-
   #v(4mm)
-  Encuentren *una* petición y respondan:
-  - ¿Qué #text(weight: "bold")[método] usó?
-  - ¿Qué #text(weight: "bold")[código de estado] devolvió?
-  - ¿Qué dice su header #text(weight: "bold")[Content-Type]?
-  - ¿Alguna petición fue #text(weight: "bold")[POST]? ¿qué llevaba en el body?
+  #text(size: 20pt, weight: "bold")[Entremos a Kahoot]
 
-  #v(6mm)
-  Cierre: 2 parejas comparten qué encontraron.
+  #v(8mm)
+  - Link: #text(style: "italic", fill: palette.charcoal)[(pendiente)]
 ]
 
 // ============================================================
 // Cierre e integración
 // ============================================================
-#section-slide(
-  number: "06",
-  title: "Cierre",
-  subtitle: "De vuelta a la pregunta con la que empezamos",
-)
 
 #activity-slide(
   kind: "Reflexión",

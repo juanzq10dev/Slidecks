@@ -62,11 +62,11 @@
 #contents-slide(
   entries: (
     (name: "Qué es y para qué sirve", page: "03"),
-    (name: "Sintaxis básica", page: "05"),
-    (name: "Tipos de datos", page: "06"),
-    (name: "Objetos, listas y anidamiento", page: "07"),
-    (name: "JSON en el código", page: "09"),
-    (name: "Errores comunes y herramientas", page: "10"),
+    (name: "Sintaxis básica", page: "06"),
+    (name: "Tipos de datos", page: "08"),
+    (name: "Objetos, listas y anidamiento", page: "10"),
+    (name: "JSON en el código", page: "13"),
+    (name: "HTTP y JSON en acción", page: "17"),
   ),
 )
 
@@ -147,7 +147,7 @@
     json-box(label: "Inválido", tone: "bad")[
       #h(0mm){ \
       #h(4mm) id: 'Sofía', \
-      #h(4mm) "activo": true, // nota \
+      #h(4mm) "activo": true,  \
       }
     ],
   )
@@ -322,4 +322,57 @@
   #v(6mm)
   #text(weight: "bold")[Cuando le hablemos a una IA por su API, el body que
   mandamos y la respuesta que leemos van a ser JSON.]
+]
+
+// ============================================================
+// 06 · A practicar
+// ============================================================
+#section-slide(
+  number: "06",
+  title: "HTTP y JSON en acción",
+  subtitle: "APIs reales y un caso por resolver",
+)
+
+#activity-slide(
+  kind: "Demo en vivo",
+  title: "Exploremos APIs reales",
+)[
+  Vamos a pedirle datos a APIs públicas desde Python y a leer juntos
+  lo que responden. Carpeta: `api-examples/`
+
+  #v(4mm)
+  #grid(
+    columns: (1fr, 1fr),
+    column-gutter: 10mm,
+    row-gutter: 3mm,
+    [#text(weight: "bold")[PokeAPI] — datos de Pokémon],
+    [#text(weight: "bold")[Rick and Morty] — personajes y episodios],
+    [#text(weight: "bold")[NASA] — la foto astronómica del día],
+    [#text(weight: "bold")[Países] — capital, población, bandera],
+  )
+
+  #v(5mm)
+  En cada una, fíjense en:
+  - La #text(weight: "bold")[petición]: método, URL y qué le cambiamos
+  - El #text(weight: "bold")[código de estado] que vuelve
+  - El #text(weight: "bold")[JSON] de la respuesta: ¿cómo llegamos al dato que queremos?
+]
+
+#activity-slide(
+  kind: "Juego",
+  title: "HTTP Detective",
+)[
+  Cada quien recibe un #text(weight: "bold")[caso misterioso] y lo resuelve
+  solo con peticiones HTTP. Se juega en `http-game/client/template.ipynb`.
+
+  #v(4mm)
+  + #text(weight: "bold")[Login] con tu carnet → recibes un token (ya viene resuelto)
+  + Mira el caso: ¿a qué hora fue el incidente?
+  + Revisa el registro de accesos y el detalle del acceso sospechoso
+  + Resuelve: manda el acceso #text(weight: "bold")[justo antes] del incidente
+
+  #v(4mm)
+  #text(size: 14pt)[Pistas: el token va en el header `Authorization: Bearer <token>` ·
+  si ves 401, 404 o 405, lean el código: les dice qué falló · pueden intentar
+  las veces que necesiten.]
 ]
