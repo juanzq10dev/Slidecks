@@ -264,7 +264,7 @@ respuesta = pedir(mensajes, tools)            # 2ª llamada: ahora sí contesta
   duration: "15 min",
 )[
   #v(2mm)
-  OpenRouter trae búsqueda web lista para usar.
+  En el notebook `02-tools.ipynb`: OpenRouter trae búsqueda web lista para usar.
 
   #v(4mm)
   + Agrega `"plugins": [{ "id": "web" }]` al body, o usa el sufijo `:online`
@@ -283,7 +283,7 @@ respuesta = pedir(mensajes, tools)            # 2ª llamada: ahora sí contesta
   duration: "15 min",
 )[
   #v(2mm)
-  Un tool que recibe código Python y devuelve lo que imprime.
+  En el notebook `03-tools.ipynb`: un tool que recibe código Python y devuelve lo que imprime.
 
   #v(4mm)
   + Escribe `ejecutar_python(codigo)` que corre el código y captura la salida
