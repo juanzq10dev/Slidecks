@@ -2,7 +2,7 @@
 
 #show: deck.with(
   title: "Clase 01 — Introducción a la Inteligencia Artificial",
-  author: "Juan Zurita",
+  author: "Juan Zurita y Pablo Flores",
 )
 
 // Barra de atención reutilizable para la sección de Transformers
@@ -23,8 +23,8 @@
 #title-slide(
   title: "Introducción a la Inteligencia Artificial",
   subtitle: "LLMs, Transformers, Temperatura, HuggingFace y Prompting",
-  author: "Juan Zurita",
-  date: "Clase 01 · Agosto 2026",
+  author: "Juan Zurita y Pablo Flores",
+  date: "Clase 01 · Septiembre 19, 2026",
 )
 
 #contents-slide(
@@ -74,7 +74,7 @@
   media-width: slide-width / 2,
   picture: image("images/02-gatos-vs-no-gatos.png", width: slide-width / 2, height: slide-height, fit: "contain"),
 )[
-  - Sistemas capaces de aprender por sí solos. 
+  - Sistemas capaces de aprender por sí solos.
   - Se inspira en cómo aprendemos por ejemplos y patrones.
 
   *Ejemplos:*
@@ -94,7 +94,7 @@
     ],
     [
       #text(size: 18pt)[
-        - Sistema que *aprende patrones a partir de datos* 
+        - Sistema que *aprende patrones a partir de datos*
         - Toma decisiones o generar resultados.
         - No sigue instrucciones escritas a mano paso a paso.
       ]
@@ -148,7 +148,7 @@
   title: "La cadena de palabras",
   duration: "2 min",
 )[
-    #v(4mm)
+  #v(4mm)
   #text(size: 20pt, weight: "bold")[¿La oración final tuvo sentido? ]
 
 

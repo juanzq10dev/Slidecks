@@ -9,15 +9,14 @@
   ),
   fill: (x, y) => if y == 0 { palette.beige } else { none },
   table.header(
-    text(weight: "bold", fill: palette.gunmetal)[#col1],
-    text(weight: "bold", fill: palette.gunmetal)[#col2],
+    text(weight: "bold", fill: palette.gunmetal)[#col1], text(weight: "bold", fill: palette.gunmetal)[#col2]
   ),
   ..rows.flatten(),
 )
 
 #show: deck.with(
   title: "Clase 02 — Buenas Prácticas en el Uso de IA",
-  author: "Juan Zurita",
+  author: "Juan Zurita y Pablo Flores",
 )
 
 // ============================================================
@@ -26,8 +25,8 @@
 #title-slide(
   title: "Buenas Prácticas en el Uso de IA",
   subtitle: "El estudiante como protagonista: pensar, cuestionar, decidir",
-  author: "Juan Zurita",
-  date: "Clase 02 · Agosto 2026",
+  author: "Juan Zurita y Pablo Flores",
+  date: "Clase 02 · Septiembre 19, 2026",
 )
 
 #contents-slide(
@@ -127,7 +126,7 @@
   title: "Delegación",
   section: "4D",
 )[
-  No todos los trabajos los puede hacer la IA. 
+  No todos los trabajos los puede hacer la IA.
 
   #v(6mm)
   - #text(weight: "bold")[Conciencia del objetivo]: un objetivo vago
@@ -226,7 +225,7 @@
 
   #v(6mm)
   #text(weight: "bold")[Lee cada respuesta como si la hubiera escrito tu
-  competencia: con escepticismo.]
+    competencia: con escepticismo.]
 ]
 
 #content-slide(
@@ -244,7 +243,7 @@
 
   #v(6mm)
   #text(weight: "bold")[Que la IA haya hecho parte del trabajo
-  tu responsabilidad sobre el resultado final.]
+    tu responsabilidad sobre el resultado final.]
 ]
 
 #activity-slide(

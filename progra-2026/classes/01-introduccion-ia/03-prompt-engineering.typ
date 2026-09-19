@@ -2,7 +2,7 @@
 
 #show: deck.with(
   title: "Clase 03 — Ingeniería de Prompts",
-  author: "Juan Zurita",
+  author: "Juan Zurita y Pablo Flores",
 )
 
 // ============================================================
@@ -84,8 +84,8 @@
 #title-slide(
   title: "Ingeniería de Prompts",
   subtitle: "Aprender a pedir: del deseo vago a la instrucción precisa",
-  author: "Juan Zurita",
-  date: "Clase 03 · Agosto 2026",
+  author: "Juan Zurita y Pablo Flores",
+  date: "Clase 03 · Septiembre 19, 2026",
 )
 
 #contents-slide(
@@ -140,6 +140,7 @@
     row-gutter: 5mm,
     spec-card("Público", "Niños de educación básica, no adultos, no adolescentes"),
     spec-card("Duración", "Dos semanas exactas, no un semestre, no un taller de un día"),
+
     spec-card("Contenido", "Solo masitas, nada de tortas, panes ni postres finos"),
     spec-card("Costo", "100 Bs por participante, y los ingredientes NO están incluidos"),
   )
@@ -214,7 +215,7 @@
 
   #v(6mm)
   #text(weight: "bold")[Ya lo vieron en la clase 01: el modelo predice lo más
-  probable. Tu contexto es lo único que puede cambiar esa probabilidad.]
+    probable. Tu contexto es lo único que puede cambiar esa probabilidad.]
 ]
 
 #statement-slide(
@@ -240,6 +241,7 @@
 
       El modelo no vio tu código, tu consigna ni tu conversación previa.
     ],
+
     [
       #text(weight: "bold", fill: palette.gunmetal)[Formato implícito]
 
@@ -504,7 +506,7 @@
   #text(size: 15pt)[
     Delimitadores, títulos en mayúscula, viñetas: cualquier estructura visible
     ayuda. #text(weight: "bold")[Un prompt bien formateado se lee mejor — para
-    el modelo y para ti.]
+      el modelo y para ti.]
   ]
 ]
 
@@ -592,7 +594,7 @@
 
   #v(6mm)
   #text(weight: "bold")[Si cambias cinco cosas a la vez y mejora, no sabes cuál
-  de las cinco lo logró.]
+    de las cinco lo logró.]
 ]
 
 
@@ -602,7 +604,10 @@
   duration: "6 min",
 )[
   #v(3mm)
-  #text(size: 19pt, weight: "bold")[Si la IA te da el código funcionando y tú no entiendes por qué funciona... ¿aprendiste algo?]
+  #text(
+    size: 19pt,
+    weight: "bold",
+  )[Si la IA te da el código funcionando y tú no entiendes por qué funciona... ¿aprendiste algo?]
 
   #v(6mm)
   #text(size: 19pt, weight: "bold")[¿Qué prompt te habría hecho aprender, en vez de solo resolver?]
