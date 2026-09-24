@@ -7,10 +7,10 @@
 
 #let palette = (
   vanilla-custard: rgb("#D7DFA3"),
-  charcoal:        rgb("#5A6061"),
-  beige:           rgb("#ECEFDF"),
-  iron-grey:       rgb("#455457"),
-  gunmetal:        rgb("#343A3C"),
+  charcoal: rgb("#5A6061"),
+  beige: rgb("#ECEFDF"),
+  iron-grey: rgb("#455457"),
+  gunmetal: rgb("#343A3C"),
 )
 
 #let slide-width = 338.67mm
@@ -61,7 +61,7 @@
   subtitle: "",
   author: "",
   date: "",
-  logo: none,
+  logo: image("images/logo.png", width: 7em, height: 7em, fit: "contain"),
 ) = {
   slide-count.update(1)
 
@@ -77,7 +77,8 @@
   // to a title-slide() call; leave unset to keep the placeholder frame
   place(top + left, dx: 18mm, dy: 18mm)[
     #box(
-      width: 32mm, height: 32mm,
+      width: 32mm,
+      height: 32mm,
       stroke: if logo == none {
         (paint: palette.vanilla-custard, thickness: 1pt, dash: "dashed")
       } else { none },
@@ -146,7 +147,9 @@
           align: (center + horizon, left + horizon, right + horizon),
           [
             #box(
-              width: icon-size, height: icon-size, radius: icon-size / 2,
+              width: icon-size,
+              height: icon-size,
+              radius: icon-size / 2,
               fill: if calc.even(i) { palette.iron-grey } else { palette.charcoal },
             )[
               #align(center + horizon)[
@@ -334,7 +337,8 @@
           picture
         } else {
           box(
-            width: media-width - 24mm, height: slide-height - 24mm,
+            width: media-width - 24mm,
+            height: slide-height - 24mm,
             stroke: (paint: palette.vanilla-custard, thickness: 1pt, dash: "dashed"),
           )[
             #align(center + horizon)[
