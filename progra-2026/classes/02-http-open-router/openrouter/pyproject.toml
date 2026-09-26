@@ -1,0 +1,12 @@
+[project]
+name = "openrouter-taller"
+version = "0.1.0"
+description = "Taller Clase 05 — tu primera llamada a un modelo de IA por OpenRouter"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "httpx>=0.27",
+    "python-dotenv>=1.0",
+    "ipykernel>=6.29",
+    "notebook>=7.2",
+]
